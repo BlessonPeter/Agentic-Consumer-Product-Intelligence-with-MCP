@@ -1,5 +1,6 @@
+
 astra_db:
-  collection_name: "products_data"
+  collection_name: "productsdata"
 
 embedding_model:
   provider: "google"
