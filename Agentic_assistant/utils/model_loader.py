@@ -2,19 +2,19 @@ import os
 import sys
 import json
 from dotenv import load_dotenv
-from utils.config_loader import load_config
+from .config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
-from logger import GLOBAL_LOGGER as log
-from Exception.custom_exception import ProductAssistantException
+from Agentic_assistant.logger import GLOBAL_LOGGER as log
+from Agentic_assistant.Exception.custom_exception import ProductAssistantException
 import asyncio
 
 
 class ApiKeyManager:
     def __init__(self):
         self.api_keys = {
-            "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
+           # "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
             "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY"),
             "GROQ_API_KEY": os.getenv("GROQ_API_KEY"),
             "ASTRA_DB_API_ENDPOINT": os.getenv("ASTRA_DB_API_ENDPOINT"),

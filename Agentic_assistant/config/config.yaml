@@ -1,10 +1,11 @@
 
 astra_db:
-  collection_name: "productsdata"
+  collection_name: "cartmate"
 
 embedding_model:
   provider: "google"
-  model_name: "models/text-embedding-004"
+  model_name: "gemini-embedding-2" #"models/text-embedding-004"
+
 
 retriever:
   top_k: 4
@@ -12,7 +13,7 @@ retriever:
 llm:
   groq:
     provider: "groq"
-    model_name: "deepseek-r1-distill-llama-70b"
+    model_name: "openai/gpt-oss-120b"
     temperature: 0
     max_output_tokens: 2048
 
