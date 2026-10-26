@@ -110,7 +110,16 @@ class DataIngestion:
             token=self.db_application_token,
             namespace=self.db_keyspace,
         )
+        import math
+        from numbers import Real
 
+        for i, doc in enumerate(documents):
+            for key, value in doc.metadata.items():
+                if isinstance(value, Real) and not math.isfinite(value):
+                    print(
+                        f"Invalid metadata: document={i}, "
+                        f"key={key!r}, value={value!r}"
+                    )
         inserted_ids = vstore.add_documents(documents)
         print(f"Successfully inserted {len(inserted_ids)} documents into AstraDB.")
         return vstore, inserted_ids
@@ -134,3 +143,5 @@ class DataIngestion:
 if __name__ == "__main__":
     ingestion = DataIngestion()
     ingestion.run_pipeline()
+
+    
