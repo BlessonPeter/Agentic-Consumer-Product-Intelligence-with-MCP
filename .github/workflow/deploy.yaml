@@ -91,7 +91,7 @@ jobs:
       # Create/Update Kubernetes Secret (for API keys)
       - name: Create Kubernetes secret for API keys
         run: |
-          kubectl create secret generic product-assistant-secrets \
+          kubectl create secret generic cartmate-agentic-assistant-secrets \
             --from-literal=OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
             --from-literal=GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} \
             --from-literal=ASTRA_DB_API_ENDPOINT=${{ secrets.ASTRA_DB_API_ENDPOINT }} \
@@ -111,18 +111,18 @@ jobs:
           REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ steps.image-tag.outputs.tag }}
         run: |
-          kubectl set image deployment/product-assistant product-assistant=$REGISTRY/$REPOSITORY:$IMAGE_TAG
+          kubectl set image deployment/cartmate-agentic-assistant cartmate-agentic-assistant=$REGISTRY/$REPOSITORY:$IMAGE_TAG
 
 
       # Verify rollout
       - name: Verify Deployment
         run: |
           set -e
-          if ! kubectl rollout status deployment/product-assistant --timeout=120s; then
+          if ! kubectl rollout status deployment/cartmate-agentic-assistant --timeout=120s; then
             echo "Rollout failed, collecting debug info..."
-            kubectl describe deployment product-assistant || true
+            kubectl describe deployment cartmate-agentic-assistant || true
             kubectl get pods -o wide || true
-            for pod in $(kubectl get pods -l app=product-assistant -o jsonpath='{.items[*].metadata.name}'); do
+            for pod in $(kubectl get pods -l app=cartmate-agentic-assistant -o jsonpath='{.items[*].metadata.name}'); do
               echo "--- Logs for pod: $pod ---"
               kubectl logs $pod --all-containers --tail=100 || true
             done
@@ -131,4 +131,4 @@ jobs:
 
       # Show Service details
       - name: Get Service Info
-        run: kubectl get svc product-assistant-service -o wide
+        run: kubectl get svc cartmate-agentic-assistant-service -o wide
