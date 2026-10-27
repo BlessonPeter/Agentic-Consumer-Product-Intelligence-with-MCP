@@ -105,7 +105,7 @@ Resources:
 
   ### --- ECR Repository ---
 
-  ProductAssistantECR:
+  CartmateAgenticAssistantECR:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: !Ref ECRRepositoryName

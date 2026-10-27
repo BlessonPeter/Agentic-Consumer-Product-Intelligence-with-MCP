@@ -20,11 +20,11 @@ spec:
         ports:
         - containerPort: 8000
         env:                              
-        - name: OPENAI_API_KEY
+        - name: GROQ_API_KEY
           valueFrom:
             secretKeyRef:
               name: cartmate-agentic-assistant-secrets
-              key: OPENAI_API_KEY
+              key: GROQ_API_KEY
         - name: GOOGLE_API_KEY
           valueFrom:
             secretKeyRef:
